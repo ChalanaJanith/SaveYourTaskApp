@@ -3,7 +3,9 @@ package com.example.sqlliteproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -32,6 +34,20 @@ public class EditToDo extends AppCompatActivity {
         todo1 = dBhandler.getSingletodo(Integer.parseInt(id));
         title.setText(todo1.getTitle());
         desc.setText(todo1.getDesc());
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String titletext = title.getText().toString();
+                String desctext = desc.getText().toString();
+                updateDate = System.currentTimeMillis();
+
+                Todo objtodo = new Todo(Integer.parseInt(id),titletext,desctext,updateDate,0);
+                int state = dBhandler.updatesingletodo(objtodo);
+                startActivity(new Intent(context,MainActivity.class));
+            }
+        });
 
     }
 }

@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        todo.setFinished(System.currentTimeMillis());
+                        dBhandler.updatesingletodo(todo);
                         startActivity(new Intent(context,MainActivity.class));
                     }
                 });
